@@ -9,6 +9,7 @@ import android.widget.Spinner;
 
 public class Activity3 extends AppCompatActivity{
     Spinner spinner;
+    Boolean num_selected = false;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,6 +20,7 @@ public class Activity3 extends AppCompatActivity{
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, num_of_tickets);
         spinner.setAdapter(adapter);
+        num_selected = true;
     }
 
     public void nextActivity4(View view){

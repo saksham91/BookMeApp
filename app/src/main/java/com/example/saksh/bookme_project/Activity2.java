@@ -29,6 +29,12 @@ public class Activity2 extends AppCompatActivity {
 
     DatePickerDialog picker;
     EditText eText;
+    String movie_selected = null;
+    int day_selected;
+    int month_selected;
+    int year_selected;
+    Boolean time_selected = false;
+    Boolean date_selected = false;
 
     class Movie {
         public String name;
@@ -63,6 +69,7 @@ public class Activity2 extends AppCompatActivity {
                 picker.getDatePicker().setMinDate(cldr.getTimeInMillis());
                 picker.getDatePicker().setMaxDate(cldr.getTimeInMillis()+ 518400000);
                 picker.show();
+                date_selected = true;
             }
         });
     }
@@ -70,7 +77,21 @@ public class Activity2 extends AppCompatActivity {
 
     public void nextActivity(View view){
         Intent intent = new Intent(Activity2.this, Activity3.class);
-        startActivity(intent);
+        if(!date_selected){
+            Toast.makeText(getBaseContext(), "Please select the date", Toast.LENGTH_SHORT).show();
+        }
+        else if(movie_selected == null){
+            Toast.makeText(getBaseContext(), "Please select the movie", Toast.LENGTH_SHORT).show();
+        }
+        else if(!time_selected){
+            Toast.makeText(getBaseContext(), "Please select the time", Toast.LENGTH_SHORT).show();
+        }
+        else{
+            intent.putExtra("Movie", movie_selected);
+            intent.putExtra("Day", day_selected);
+            intent.putExtra("Month", month_selected);
+            startActivity(intent);
+        }
     }
 
     @SuppressLint("ResourceType")
@@ -78,6 +99,9 @@ public class Activity2 extends AppCompatActivity {
         //Log.i("populateMovies", "Day -> " + day);
         //get the date and the month. Select the movie. Based on movie,date,month selection,
         //map it to the ShowTiming object.
+        day_selected = day;
+        month_selected = month;
+        year_selected= year;
         final Movie[] movie = new Movie[5];
         movie[0] = new Movie("Fantastic Beasts: The Crimes of Grindelwald", (float)7.0);
         movie[1] = new Movie("The Grinch", (float)6.4);
@@ -111,6 +135,7 @@ public class Activity2 extends AppCompatActivity {
             textview.setLayoutParams(rlp2);
             rl.addView(textview);
             final String mName = movie[i].name;
+            movie_selected = mName;
             textview.setOnClickListener(new View.OnClickListener(){
                 public void onClick(View v){
                     //Toast.makeText(getBaseContext(), "Movie name: " + mName, Toast.LENGTH_SHORT).show();
@@ -121,11 +146,12 @@ public class Activity2 extends AppCompatActivity {
                     menu.getMenu().add("7:00 PM");
                     menu.getMenu().add("10:00 PM");
                     menu.show();
-//                        menu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-//                            public boolean onMenuItemClick(MenuItem item) {
-//                                return true;
-//                            }
-//                        });
+                        menu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                            public boolean onMenuItemClick(MenuItem item) {
+                                time_selected = true;
+                                return true;
+                            }
+                        });
                 }
             });
             RelativeLayout.LayoutParams rlp1 = new RelativeLayout.LayoutParams(
