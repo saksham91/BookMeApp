@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="10dp"
+    android:orientation="vertical"
+    android:id="@+id/MainRelative">
+
+    <TextView
+        android:id="@+id/thankyou"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="THANK YOU for using BookMe!"
+        android:textColor="@color/bg_main"
+        android:textStyle="bold"
+        android:textSize="40dp"
+        android:textAlignment="center"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="20dp"
+        />
+    <ImageView
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_below="@id/thankyou"
+        android:src="@drawable/logo"
+        android:layout_above="@id/checkemail"/>
+
+    <TextView
+        android:id="@+id/checkemail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#000000"
+        android:textAlignment="center"
+        android:textSize="20dp"
+        android:text="Please check your email and proceed to the theater to finish purchasing your tickets!"
+        android:layout_above="@id/home_activity6"
+        android:layout_marginBottom="25dp"
+        />
+
+    <Button
+        android:id="@+id/home_activity6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:text="Go Home"
+        android:fontFamily="sans-serif-condensed"
+        android:textStyle="bold"
+        android:paddingLeft="25dp"
+        android:paddingRight="25dp"
+        android:background="@drawable/button_style"
+        android:onClick="homeActivity"  />
+
+</RelativeLayout>

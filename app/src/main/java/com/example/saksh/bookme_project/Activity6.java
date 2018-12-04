@@ -1,22 +1,23 @@
 package com.example.saksh.bookme_project;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
-
-    @Override
+public class Activity6 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity6);
     }
+
     public void onBackPressed() {
         //Toast.makeText(getBaseContext(), "Hahahaha..", Toast.LENGTH_LONG).show();
     }
-    public void nextActivity(View view){
-        Intent intent = new Intent(MainActivity.this, Activity2.class);
+
+    public void homeActivity(View view){
+        Intent intent = new Intent(Activity6.this, MainActivity.class);
         startActivity(intent);
     }
 }

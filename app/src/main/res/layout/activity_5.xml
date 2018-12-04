@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="10dp"
+    android:orientation="vertical"
+    android:id="@+id/MainLinear">
+
+    <LinearLayout
+        android:id="@+id/linearLayout5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:id="@+id/MovieName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Movie Name"
+            android:textSize="25sp"
+            android:textColor="#000000"
+            android:fontFamily="sans-serif-condensed"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:gravity="center_horizontal"
+            />
+        <TextView
+            android:id="@+id/ShowTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Show Time is at: "
+            android:fontFamily="sans-serif-condensed"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor="#000000"
+            android:layout_gravity="center"
+            android:gravity="center_horizontal"/>
+        <TextView
+            android:id="@+id/DateandTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Date, Time"
+            android:fontFamily="sans-serif-condensed"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor="#000000"
+            android:layout_gravity="center"
+            android:gravity="center_horizontal"/>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/relativeinfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp">
+
+        <TextView
+            android:id="@+id/tickets"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tickets:"
+            android:textSize="16sp"
+            android:layout_alignParentLeft="true"
+            android:fontFamily="sans-serif-condensed"
+            android:textStyle="bold"
+            android:layout_marginBottom="10dp"
+            />
+        <TextView
+            android:id="@+id/ticketnames"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="16sp"
+            android:layout_alignRight="@id/tickets"
+            android:layout_alignParentRight="true"
+            android:fontFamily="sans-serif-condensed"
+            android:textStyle="bold"
+            android:layout_marginBottom="10dp"
+            />
+        <TextView
+            android:id="@+id/baseprice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Base Price per Ticket: "
+            android:textSize="16sp"
+            android:layout_below="@id/tickets"
+            android:fontFamily="sans-serif-condensed"
+            android:textStyle="bold"
+            android:layout_marginBottom="10dp"
+            />
+        <TextView
+            android:id="@+id/basepricecalculation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="4 x $10 = $40"
+            android:textSize="16sp"
+            android:layout_alignRight="@id/tickets"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/ticketnames"
+            android:fontFamily="sans-serif-condensed"
+            android:textStyle="bold"
+            android:layout_marginBottom="10dp"
+            />
+        <TextView
+            android:id="@+id/tax"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tax: "
+            android:textSize="16sp"
+            android:layout_below="@id/baseprice"
+            android:fontFamily="sans-serif-condensed"
+            android:textStyle="bold"
+            android:layout_marginBottom="10dp"
+            />
+        <TextView
+            android:id="@+id/taxcalculation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="16sp"
+            android:layout_alignRight="@id/tax"
+            android:layout_alignParentRight="true"
+            android:fontFamily="sans-serif-condensed"
+            android:textStyle="bold"
+            android:layout_below="@id/basepricecalculation"
+            android:layout_marginBottom="10dp"
+            />
+        <TextView
+            android:id="@+id/conveniencefee"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Convenience Fee: "
+            android:textSize="16sp"
+            android:layout_below="@id/tax"
+            android:fontFamily="sans-serif-condensed"
+            android:textStyle="bold"
+            android:layout_marginBottom="10dp"
+            />
+        <TextView
+            android:id="@+id/conveniencefeevalue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="$4.0"
+            android:textSize="16sp"
+            android:layout_alignRight="@id/conveniencefee"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/taxcalculation"
+            android:fontFamily="sans-serif-condensed"
+            android:textStyle="bold"
+            android:layout_marginBottom="10dp"
+            />
+
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/conveniencefee"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="?android:attr/listDivider" />
+
+        <TextView
+            android:id="@+id/totalamount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Total Due at Theater: "
+            android:textSize="16sp"
+            android:layout_below="@id/divider"
+            android:fontFamily="sans-serif-condensed"
+            android:textStyle="bold"
+            android:layout_marginBottom="10dp"
+            />
+        <TextView
+            android:id="@+id/totalamountdue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="$400"
+            android:textSize="16sp"
+            android:layout_alignRight="@id/totalamount"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/divider"
+            android:fontFamily="sans-serif-condensed"
+            android:textStyle="bold"
+            android:layout_marginBottom="10dp"
+            />
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/next_activity5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:text="Confirm Booking"
+            android:fontFamily="sans-serif-condensed"
+            android:textStyle="bold"
+            android:paddingLeft="25dp"
+            android:paddingRight="25dp"
+            android:background="@drawable/button_style"
+            android:onClick="lastActivity"  />
+
+    </RelativeLayout>
+
+</LinearLayout>

@@ -4,14 +4,18 @@ import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -30,9 +34,10 @@ public class Activity2 extends AppCompatActivity {
     DatePickerDialog picker;
     EditText eText;
     String movie_selected = null;
-    int day_selected;
-    int month_selected;
-    int year_selected;
+    String day_selected;
+    String month_selected;
+    String year_selected;
+    String what_time = null;
     Boolean time_selected = false;
     Boolean date_selected = false;
 
@@ -70,6 +75,8 @@ public class Activity2 extends AppCompatActivity {
                 picker.getDatePicker().setMaxDate(cldr.getTimeInMillis()+ 518400000);
                 picker.show();
                 date_selected = true;
+                InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(eText.getWindowToken(), 0);
             }
         });
     }
@@ -90,6 +97,7 @@ public class Activity2 extends AppCompatActivity {
             intent.putExtra("Movie", movie_selected);
             intent.putExtra("Day", day_selected);
             intent.putExtra("Month", month_selected);
+            intent.putExtra("Time", what_time);
             startActivity(intent);
         }
     }
@@ -99,9 +107,9 @@ public class Activity2 extends AppCompatActivity {
         //Log.i("populateMovies", "Day -> " + day);
         //get the date and the month. Select the movie. Based on movie,date,month selection,
         //map it to the ShowTiming object.
-        day_selected = day;
-        month_selected = month;
-        year_selected= year;
+        day_selected = day+"";
+        month_selected = (month + 1) + "";
+        year_selected= year+"";
         final Movie[] movie = new Movie[5];
         movie[0] = new Movie("Fantastic Beasts: The Crimes of Grindelwald", (float)7.0);
         movie[1] = new Movie("The Grinch", (float)6.4);
@@ -135,11 +143,11 @@ public class Activity2 extends AppCompatActivity {
             textview.setLayoutParams(rlp2);
             rl.addView(textview);
             final String mName = movie[i].name;
-            movie_selected = mName;
             textview.setOnClickListener(new View.OnClickListener(){
                 public void onClick(View v){
+                    movie_selected = mName;
                     //Toast.makeText(getBaseContext(), "Movie name: " + mName, Toast.LENGTH_SHORT).show();
-                    PopupMenu menu = new PopupMenu(getApplicationContext(), v);
+                    PopupMenu menu = new PopupMenu(getApplicationContext(), v, Gravity.RIGHT);
                     menu.getMenu().add("10:00 AM");
                     menu.getMenu().add("1:00 PM");
                     menu.getMenu().add("4:00 PM");
@@ -149,6 +157,8 @@ public class Activity2 extends AppCompatActivity {
                         menu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                             public boolean onMenuItemClick(MenuItem item) {
                                 time_selected = true;
+                                //Toast.makeText(getBaseContext(),"You Clicked : " + month_selected, Toast.LENGTH_SHORT).show();
+                                what_time = (String)item.getTitle();
                                 return true;
                             }
                         });
