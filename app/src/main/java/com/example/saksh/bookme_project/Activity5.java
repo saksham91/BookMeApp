@@ -7,6 +7,7 @@ import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.telephony.SmsManager;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import java.text.DecimalFormat;
@@ -46,9 +47,16 @@ public class Activity5 extends AppCompatActivity {
     }
 
     public void lastActivity(View view){
-        sendSMS("9789542402", "Hey..");
         Intent intent = new Intent(Activity5.this, Activity6.class);
-        startActivity(intent);
+        EditText et = findViewById(R.id.phone_num);
+        if(et.getText().length() < 10){
+            Toast.makeText(getBaseContext(), "Please enter a valid Phone Number", Toast.LENGTH_LONG).show();
+        }
+        else {
+            intent.putExtra("Phone", et.getText().toString());
+
+            startActivity(intent);
+        }
     }
 
     public void calculate_cost(int num_tickets){
@@ -77,16 +85,5 @@ public class Activity5 extends AppCompatActivity {
     }
 
 
-    public void sendSMS(String phoneNo, String msg) {
-        try {
-            SmsManager smsManager = SmsManager.getDefault();
-            smsManager.sendTextMessage(phoneNo, null, msg, null, null);
-            Toast.makeText(getApplicationContext(), "Message Sent",
-                    Toast.LENGTH_LONG).show();
-        } catch (Exception ex) {
-            Toast.makeText(getApplicationContext(),ex.getMessage().toString(),
-                    Toast.LENGTH_LONG).show();
-            ex.printStackTrace();
-        }
-    }
+
 }

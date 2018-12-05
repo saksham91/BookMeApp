@@ -33,6 +33,7 @@ import java.util.Arrays;
 @SuppressLint("ResourceType")
 public class Activity4 extends AppCompatActivity {
     int NUM_OF_TICKETS = 0;
+    String tickets;
     final ArrayList<Integer> selected_seats = new ArrayList<Integer>();
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,9 +46,8 @@ public class Activity4 extends AppCompatActivity {
         LinearLayout linearLayout4 = findViewById(R.id.linearLayout4);
 
         String movie = getIntent().getStringExtra("Movie");
-        //String day = getIntent().getStringExtra("Day");
         String time_s = getIntent().getStringExtra("Time");
-        String tickets = getIntent().getStringExtra("Tickets");
+        tickets = getIntent().getStringExtra("Tickets");
 
         TextView tv1 = findViewById(R.id.moviename);
         TextView tv2 = findViewById(R.id.showtime);
@@ -217,20 +217,25 @@ public class Activity4 extends AppCompatActivity {
         }
     }
     public void nextActivity(View view){
-        String[] seat_info = new String[7];
-        seat_info = get_data();
-        String movie = getIntent().getStringExtra("Movie");
-        String day = getIntent().getStringExtra("Day");
-        String month = getIntent().getStringExtra("Month");
-        String time_s = getIntent().getStringExtra("Time");
-        //Toast.makeText(getBaseContext(),"Seats->" + seat_info[0] + seat_info[1],Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(Activity4.this, Activity5.class);
-        intent.putExtra("Array", seat_info);
-        intent.putExtra("Movie", movie);
-        intent.putExtra("Time", time_s);
-        intent.putExtra("Day", day);
-        intent.putExtra("Month", month);
-        startActivity(intent);
+        if(selected_seats.size() < Integer.parseInt(tickets)){
+            Toast.makeText(getBaseContext(), "Please select " + tickets + " seats", Toast.LENGTH_SHORT).show();
+        }
+        else{
+            String[] seat_info = new String[7];
+            seat_info = get_data();
+            String movie = getIntent().getStringExtra("Movie");
+            String day = getIntent().getStringExtra("Day");
+            String month = getIntent().getStringExtra("Month");
+            String time_s = getIntent().getStringExtra("Time");
+            //Toast.makeText(getBaseContext(),"Seats->" + seat_info[0] + seat_info[1],Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(Activity4.this, Activity5.class);
+            intent.putExtra("Array", seat_info);
+            intent.putExtra("Movie", movie);
+            intent.putExtra("Time", time_s);
+            intent.putExtra("Day", day);
+            intent.putExtra("Month", month);
+            startActivity(intent);
+        }
     }
 
     public String[] get_data(){

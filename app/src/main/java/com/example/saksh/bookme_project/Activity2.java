@@ -7,6 +7,7 @@ import android.app.DialogFragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -25,6 +26,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -44,9 +48,11 @@ public class Activity2 extends AppCompatActivity {
     class Movie {
         public String name;
         public float rating;
-        Movie(String name, float rating){
+        public ArrayList<String> timings;
+        Movie(String name, float rating, ArrayList<String> timings){
             this.name = name;
             this.rating = rating;
+            this.timings = timings;
         }
     }
 
@@ -111,16 +117,27 @@ public class Activity2 extends AppCompatActivity {
         month_selected = (month + 1) + "";
         year_selected= year+"";
         final Movie[] movie = new Movie[5];
-        movie[0] = new Movie("Fantastic Beasts: The Crimes of Grindelwald", (float)7.0);
-        movie[1] = new Movie("The Grinch", (float)6.4);
-        movie[2] = new Movie("Bohemian Rhapsody", (float)8.3);
-        movie[3] = new Movie("The Dark Knight", (float)9.1);
-        movie[4] = new Movie("Ralph Breaks the Internet", (float)7.8);
+        String times0[] = {"10:00 AM", "1:00 PM", "4:00 PM", "7:00 PM", "10:00 PM"};
+        String times1[] = {"9:00 AM", "12:00 PM", "3:00 PM", "6:00 PM", "9:00 PM"};
+        String times2[] = {"11:00 AM", "2:00 PM", "5:00 PM", "8:00 PM", "11:00 PM"};
+        String times3[] = {"8:00 AM", "1:00 PM", "4:00 PM", "7:00 PM", "10:00 PM"};
+        String times4[] = {"10:00 AM", "2:00 PM", "5:00 PM", "8:00 PM", "10:30 PM"};
+        ArrayList<String> time0 = new ArrayList<String>(Arrays.asList(times0));
+        ArrayList<String> time1 = new ArrayList<String>(Arrays.asList(times1));
+        ArrayList<String> time2 = new ArrayList<String>(Arrays.asList(times2));
+        ArrayList<String> time3 = new ArrayList<String>(Arrays.asList(times3));
+        ArrayList<String> time4 = new ArrayList<String>(Arrays.asList(times4));
+
+        movie[0] = new Movie("Fantastic Beasts: The Crimes of Grindelwald", (float)7.0,time0);
+        movie[1] = new Movie("The Grinch", (float)6.4,time1);
+        movie[2] = new Movie("Bohemian Rhapsody", (float)8.3, time2);
+        movie[3] = new Movie("The Dark Knight", (float)9.1, time3);
+        movie[4] = new Movie("Ralph Breaks the Internet", (float)7.8, time4);
 
         RelativeLayout rl = findViewById(R.id.relativeLayout);
         for (int i = 0; i < movie.length; i++) {
             float stepSize = (float) 0.5;
-            TextView textview = new TextView(this);
+            final TextView textview = new TextView(this);
             textview.setText(movie[i].name);
             textview.setId(2000 + i);
             textview.setTextSize(16);
@@ -143,21 +160,20 @@ public class Activity2 extends AppCompatActivity {
             textview.setLayoutParams(rlp2);
             rl.addView(textview);
             final String mName = movie[i].name;
+            final ArrayList<String> temptime= new ArrayList<String>(movie[i].timings);
             textview.setOnClickListener(new View.OnClickListener(){
                 public void onClick(View v){
                     movie_selected = mName;
-                    //Toast.makeText(getBaseContext(), "Movie name: " + mName, Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getBaseContext(), mName, Toast.LENGTH_SHORT).show();
                     PopupMenu menu = new PopupMenu(getApplicationContext(), v, Gravity.RIGHT);
-                    menu.getMenu().add("10:00 AM");
-                    menu.getMenu().add("1:00 PM");
-                    menu.getMenu().add("4:00 PM");
-                    menu.getMenu().add("7:00 PM");
-                    menu.getMenu().add("10:00 PM");
+                    for (int i = 0; i < 5; i++) {
+                        menu.getMenu().add(temptime.get(i));
+                    }
                     menu.show();
                         menu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                             public boolean onMenuItemClick(MenuItem item) {
                                 time_selected = true;
-                                //Toast.makeText(getBaseContext(),"You Clicked : " + month_selected, Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getBaseContext(),movie_selected + ", " + item.getTitle(), Toast.LENGTH_SHORT).show();
                                 what_time = (String)item.getTitle();
                                 return true;
                             }
