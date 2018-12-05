@@ -13,16 +13,17 @@ import android.widget.Toast;
 import java.text.DecimalFormat;
 
 public class Activity5 extends AppCompatActivity {
+    String movie_name, show_time, day, month;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_5);
 
         Intent intent = getIntent();
         String [] seatArray = intent.getStringArrayExtra("Array");
-        String movie_name = getIntent().getStringExtra("Movie");
-        String show_time = getIntent().getStringExtra("Time");
-        String day = getIntent().getStringExtra("Day");
-        String month = getIntent().getStringExtra("Month");
+        movie_name = getIntent().getStringExtra("Movie");
+        show_time = getIntent().getStringExtra("Time");
+        day = getIntent().getStringExtra("Day");
+        month = getIntent().getStringExtra("Month");
 
         TextView tv = findViewById(R.id.ticketnames);
         for(int i = 0; i < seatArray.length; i++){
@@ -54,7 +55,10 @@ public class Activity5 extends AppCompatActivity {
         }
         else {
             intent.putExtra("Phone", et.getText().toString());
-
+            intent.putExtra("Movie", movie_name);
+            intent.putExtra("Time", show_time);
+            intent.putExtra("Day", day);
+            intent.putExtra("Month", month);
             startActivity(intent);
         }
     }

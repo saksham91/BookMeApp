@@ -6,21 +6,30 @@ import android.support.v7.app.AppCompatActivity;
 import android.telephony.SmsManager;
 import android.view.View;
 import android.widget.Toast;
-
 import java.util.Random;
 
 
 public class Activity6 extends AppCompatActivity {
 
     private static final String ALLOWED_CHARACTERS ="0123456789QWERTYUIOPLKJHGFDSAZXCVBNM";
+    String movie_name;
+    String show_time;
+    String day;
+    String month;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_6);
+        movie_name = getIntent().getStringExtra("Movie");
+        show_time = getIntent().getStringExtra("Time");
+        day = getIntent().getStringExtra("Day");
+        month = getIntent().getStringExtra("Month");
+        String msg = movie_name + "\n" + "Date: " + month + "/" + day + "\n" + "Showtime: " + show_time + "\n\n";
         String rand = getRandomString(10);
         String phone = getIntent().getStringExtra("Phone");
+        msg += rand;
         //Toast.makeText(getBaseContext(), "Phone -> "+phone, Toast.LENGTH_LONG).show();
-        sendSMS(phone, rand);
+        sendSMS(phone, msg);
     }
 
     public void onBackPressed() {
